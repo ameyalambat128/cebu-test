@@ -1,0 +1,19 @@
+{
+  "name": "cebu-test",
+  "version": "1.0.0",
+  "description": "Test for Twitter Scrape",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && (./dst/index.js)",
+    "test": "tsc && node ./dst/index.js",
+    "start": "node ./dst/index.js"
+  },
+  "author": "Ameya",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.2.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
