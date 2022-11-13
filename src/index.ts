@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import { TwitterApi } from "twitter-api-v2";
 import {} from "dotenv/config";
 
 const randomIntFromInterval = (min: number, max: number) => {
@@ -59,26 +60,46 @@ const searchAccount = async (page: puppeteer.Page, account: string) => {
   }
 };
 
+// const main = async () => {
+//   try {
+//     const browser = await puppeteer.launch({ headless: false });
+//     const page = await browser.newPage();
+//     const URL = "https://twitter.com/login";
+
+//     await page.setViewport({
+//       width: 1280,
+//       height: 800,
+//       deviceScaleFactor: 1,
+//     });
+
+//     await page.goto(URL, { waitUntil: "networkidle2" });
+
+//     await authenticate(page);
+//     await page.waitForXPath(`//input`);
+//     await searchAccount(page, "elon musk");
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
+
 const main = async () => {
   try {
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
-    const URL = "https://twitter.com/login";
-
-    await page.setViewport({
-      width: 1280,
-      height: 800,
-      deviceScaleFactor: 1,
+    const client = new TwitterApi(
+      "AAAAAAAAAAAAAAAAAAAAAJMAjQEAAAAAubAnqUuH7zDb0szMmri3RC766iw%3DPpbW0Ato7p5w3l3Q8NZHdOgAjcln0lH8SkG8aLNSzvDq7yrMvF"
+    );
+    const result = await client.v2.userByUsername("elonmusk", {
+      "user.fields": [
+        "id",
+        "description",
+        "created_at",
+        "profile_image_url",
+        "location",
+        "verified",
+      ],
     });
-
-    await page.goto(URL, { waitUntil: "networkidle2" });
-    // await sleepFor(1000, 2000);
-
-    await authenticate(page);
-    await page.waitForXPath(`//input`);
-    await searchAccount(page, "elon musk");
+    console.log(result);
   } catch (e) {
-    console.error(e);
+    console.log(e);
   }
 };
 
