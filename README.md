@@ -1,4 +1,4 @@
-# cebu-test
+# Cebu
 
 Install all dependancies
 
@@ -8,7 +8,7 @@ yarn install
 
 ### Scripts:
 
-- Run Test
+- Open in your browser http://localhost:8080
 
 ```
 yarn test
